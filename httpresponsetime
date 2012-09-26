@@ -26,7 +26,7 @@ config  =  {
                     "graph_title" : 'Http Response Times',
                     "graph_args" : '--base 1000 -l 0',
                     "graph_vlabel" : 'Time (in milliseconds)',
-                    "graph_category" : 'Http Monitoring',
+                    "graph_category" : 'nojuice',
                     "graph_scale" : 'no',
                     "label" : 'Response times',
                     
@@ -67,7 +67,7 @@ def get_request_time(url):
     Returns -1 on failuer (Http status code other that 200 > x > 400
     '''
     import httplib2, time
-    fetcher = httplib2.Http()
+    fetcher = httplib2.Http(disable_ssl_certificate_validation=True)
     initial = time.time()
     resp, content = fetcher.request(url)
     duration = int((time.time() - initial) * 1000)
